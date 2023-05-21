@@ -1,13 +1,19 @@
 import { createRouter, createWebHistory } from "vue-router";
 
+import Homepage from './components/Homepage.vue';
 import Login from './components/Login.vue';
 import Register from './components/Register.vue';
-import Admin from './components/Admin.vue';
-import User from './components/User.vue';
+import WelcomePage from './components/WelcomePage.vue';
+import UserList from './components/UserList.vue';
 
 const routes = [
     {
         path: '/',
+        name: 'Homepage',
+        component: Homepage
+    },
+    {
+        path: '/login',
         name: 'Login',
         component: Login
     },
@@ -17,21 +23,21 @@ const routes = [
         component: Register
     },
     {
-        path: '/admin',
-        name: 'Admin',
-        component: Admin,
+        path: '/welcome',
+        name: 'Welcome',
+        component: WelcomePage,
+        props: true,
         meta: {
             requiresAuth: true,
-            requiresAdmin: true,
         }
     },
     {
-        path: '/user',
-        name: 'User',
-        component: User,
+        path: '/user-list',
+        name: 'UserList',
+        component: UserList,
         meta: {
             requiresAuth: true,
-            requiresUser: true,
+            // requiresAdmin: true,
         }
     }
 ];
@@ -43,29 +49,15 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     const isAuthenticated = localStorage.getItem('token');
-    const isRole = localStorage.getItem('role');
-    if (to.name === 'Login' && isAuthenticated) {
-        if (isRole === 'admin') {
-            next({ name: 'Admin' });
-        } else if (isRole === 'user') {
-            next({ name: 'User' });
-        }
-    } else if (to.matched.some(record => record.meta.requiresAuth) && to.matched.some(record => record.meta.requiresAdmin)) {
+    const isRole = JSON.parse(localStorage.getItem('user'));
+    if (to.matched.some(record => record.meta.requiresAuth)) {
         if (!isAuthenticated) {
             next({ name: 'Login' });
-        } else if (isAuthenticated && isRole !== 'admin') {
-            next({ name: 'User' });
         } else {
             next();
         }
-    } else if (to.matched.some(record => record.meta.requiresAuth) && to.matched.some(record => record.meta.requiresUser)) {
-        if (!isAuthenticated) {
-            next({ name: 'Login' });
-        } else if (isAuthenticated && isRole !== 'user') {
-            next({ name: 'Admin' });
-        } else {
-            next();
-        }
+    } else if (to.name === 'Login' && isAuthenticated) {
+        next({ name: 'Welcome' })
     } else {
         next();
     }

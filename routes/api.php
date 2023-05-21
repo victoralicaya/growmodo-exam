@@ -26,6 +26,7 @@ Route::prefix('v1')->group(function () {
 
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('logout', [AuthController::class, 'logout']);
+        Route::post('unsubsribe', [UserController::class, 'unsubscribe']);
         Route::middleware(['admin'])->group(function () {
             Route::get('users', [UserController::class, 'users']);
         });

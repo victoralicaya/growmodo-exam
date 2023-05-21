@@ -3,7 +3,8 @@
         <div class="alert alert-danger" v-if="invalidCred">
             {{ invalidCred }}
         </div>
-        <div class="login-container">
+        <div class="form-container">
+            <a href="/" class="btn btn-secondary mb-2">Go Back</a>
             <div class="card">
                 <div class="card-header text-center">
                     <h3>LOGIN</h3>
@@ -60,15 +61,9 @@ export default {
 
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('user', JSON.stringify(data.data));
-                localStorage.setItem('role', data.data.role);
 
-                if (data.data.role === 'admin') {
-                    router.push('/admin');
-                } else {
-                    router.push('/user');
-                }
+                router.push({ name: 'Welcome' });
 
-                console.log(response.data);
             } catch (error) {
                 if (error.response && error.response.data && error.response.data.errors) {
                     const errors = error.response.data.errors;
@@ -104,24 +99,3 @@ export default {
     }
 }
 </script>
-
-<style>
-.head-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.login-container {
-    width: 30%;
-}
-
-.error-message {
-    color: red;
-}
-
-.alert {
-    width: 30%;
-}
-</style>

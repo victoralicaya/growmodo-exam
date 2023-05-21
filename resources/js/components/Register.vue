@@ -1,9 +1,10 @@
 <template>
     <div class="head-container">
         <div class="alert alert-success" v-if="successMessage">
-            {{ successMessage }}
+            {{ successMessage }} Redirecting you to Login.
         </div>
-        <div class="register-container">
+        <div class="form-container">
+            <a href="/" class="btn btn-secondary mb-2">Go Back</a>
             <div class="card">
                 <div class="card-header text-center">
                     <h3>REGISTER</h3>
@@ -18,7 +19,7 @@
 
                         <div class="mt-3 mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="text" v-model="form.email" class="form-control" placeholder="Email">
+                            <input type="email" v-model="form.email" class="form-control" placeholder="Email">
                             <span class="error-message">{{ errorMessage.email }}</span>
                         </div>
 
@@ -80,6 +81,9 @@ export default {
                     password_confirmation: form.password_confirmation
                 })
                 successMessage.value = response.data.message;
+                setTimeout(() =>  {
+                    window.location.href = '/login';
+                }, 3000);
             } catch (error) {
                 if (error.response && error.response.data && error.response.data.errors) {
                     const errors = error.response.data.errors;
@@ -115,24 +119,3 @@ export default {
     }
 }
 </script>
-
-<style>
-.head-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.register-container {
-    width: 30%;
-}
-
-.error-message {
-    color: red;
-}
-
-.alert {
-    width: 30%;
-}
-</style>

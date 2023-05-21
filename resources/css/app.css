@@ -1,0 +1,19 @@
+ .head-container {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 100vh;
+     flex-direction: column;
+ }
+
+ .form-container {
+     width: 30%;
+ }
+
+ .error-message {
+     color: red;
+ }
+
+ .alert {
+     width: 30%;
+ }
