@@ -27,3 +27,9 @@
         width: 100%;
     }
  }
+
+ @media (min-width: 1024px) {
+    .form-container {
+        width: 50%;
+    }
+ }
