@@ -54,7 +54,7 @@ router.beforeEach((to, from, next) => {
         } else {
             next();
         }
-    } else if (to.name === 'Login' && isAuthenticated) {
+    } else if ((to.name === 'Login' || to.name === 'Homepage' || to.name === 'Register') && isAuthenticated) {
         next({ name: 'Welcome' })
     } else {
         next();
