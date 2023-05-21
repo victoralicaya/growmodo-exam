@@ -45,7 +45,7 @@
                     </form>
                 </div>
                 <div class="card-footer text-center">
-                    <router-link to="/">Login</router-link>
+                    <router-link to="/login">Login</router-link>
                 </div>
             </div>
         </div>
