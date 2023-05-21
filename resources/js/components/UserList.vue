@@ -1,25 +1,27 @@
 <template>
     <div class="container">
         <router-link to="/welcome" class="btn btn-outline-primary mt-5">Go Back</router-link>
-        <table class="table table-bordered table-striped mt-2">
-            <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Phone Number</th>
-                    <th>Role</th>
-                </tr>
-            </thead>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover mt-2">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
 
-            <tbody>
-                <tr v-for="user in users.data" :key="user.id">
-                    <td>{{ user.username }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.phone_number }}</td>
-                    <td>{{ user.role }}</td>
-                </tr>
-            </tbody>
-        </table>
+                <tbody>
+                    <tr v-for="user in users.data" :key="user.id">
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.phone_number }}</td>
+                        <td>{{ user.role }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <div class="d-flex justify-content-center">
             <div class="btn-group">
                 <button type="button" @click="previousPage" :disabled="page === 1" class="btn btn-outline-primary">Prev</button>
