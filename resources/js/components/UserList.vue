@@ -56,7 +56,7 @@ export default {
                 users.value = response.data.data;
                 totalPages.value = response.data.data.last_page;
             } catch (error) {
-                if (error.response && error.response.status === 403) {
+                if (error.response && error.response.status === 401) {
                     router.push({ name: 'Welcome' });
                 }
                 console.log(error);
